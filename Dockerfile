@@ -8,8 +8,8 @@ FROM openjdk:17-jdk-slim-buster
 
 COPY . .
 
-WORKDIR /app
-ADD tagert/hello-*jar /app/
+WORKDIR /opt
+ADD target/hello-world-app-1.0-SNAPSHOT.jar /opt/
 EXPOSE 8080
 
-CMD ["java" "-jar" "hello-*jar"]
+CMD ["java", "-jar", "hello-world-app-1.0-SNAPSHOT.jar"]
