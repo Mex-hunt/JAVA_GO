@@ -35,3 +35,24 @@ jobs:
     #   run: mvn deploy -s $GITHUB_WORKSPACE/settings.xml
     #   env:
     #     GITHUB_TOKEN: ${{ github.token }}
+    - name: Codacy CLI V2
+      uses: codacy/codacy-cli-v2-action@0.2.0
+    #   with:
+    #     tool: # optional
+    # # The path to the SARIF file to upload.
+    #       sarif_file_path: # optional, default is ./report.sarif
+    # # Upload the report to Codacy.
+    #        upload_report: # optional, default is false
+    # # The project token to use for the analysis.
+    #        project_token: 
+    # # User level token for Codacy API.
+    #        api_token: # optional
+    # # Provider name (e.g., gh, gl, bb).
+    #        provider: # optional
+    # # Repository owner.
+    #         owner: # optional
+    # # Repository name.
+    #         repository: # optional
+    # # Eventual registry address.
+    #         registry: # optional, default is 
+          
