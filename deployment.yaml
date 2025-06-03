@@ -1,70 +1,64 @@
 apiVersion: apps/v1
 kind: Deployment
 metadata:
-  annotations:
-  labels:
-    app: java-app
   name: java-app
   namespace: default
+  labels:
+    app: java-app
+  annotations: {}
 spec:
-  progressDeadlineSeconds: 180
   replicas: 1
   revisionHistoryLimit: 5
+  progressDeadlineSeconds: 180
   selector:
     matchLabels:
       app: java-app
   strategy:
+    type: RollingUpdate
     rollingUpdate:
       maxSurge: 25%
       maxUnavailable: 25%
-    type: RollingUpdate
   template:
     metadata:
       labels:
         app: java-app
     spec:
       containers:
-      # - env:
-      #   - name: spring.datasource.hikari.minimum-idle
-      #     value: "5"
-
-      - image: obachimex/app:latest
-        imagePullPolicy: IfNotPresent
-        livenessProbe:
-          failureThreshold: 5
-          httpGet:
-            path: /
-            port: 8080
+        - name: java-app
+          image: obachimex/app:latest
+          imagePullPolicy: IfNotPresent
+          ports:
+            - name: http
+              containerPort: 8080
+              protocol: TCP
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 8080
               scheme: HTTP
             initialDelaySeconds: 120
             periodSeconds: 30
-            successThreshold: 1
             timeoutSeconds: 10
-        name: java-app
-        ports:
-        - containerPort: 8080
-          name: http
-          protocol: TCP
-        readinessProbe:
-          failureThreshold: 3
-          httpGet:
-            path: /
-            port: 8080
-            scheme: HTTP
-          initialDelaySeconds: 120
-          periodSeconds: 20
-          successThreshold: 1
-          timeoutSeconds: 1
-        resources:
-          limits:
-            cpu: 200m
-            memory: 1000Mi
-          requests:
-            cpu: 100m
-            memory: 500Mi
+            successThreshold: 1
+            failureThreshold: 5
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 120
+            periodSeconds: 20
+            timeoutSeconds: 1
+            successThreshold: 1
+            failureThreshold: 3
+          resources:
+            requests:
+              cpu: 100m
+              memory: 500Mi
+            limits:
+              cpu: 200m
+              memory: 1000Mi
       dnsPolicy: Default
-      # imagePullSecrets:
-      # - name: acrsecret
       restartPolicy: Always
-
-
+      # imagePullSecrets:
+      #   - name: acrsecret
