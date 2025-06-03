@@ -29,18 +29,18 @@ spec:
       #     value: "5"
 
       - image: obachimex/app:latest
-       imagePullPolicy: IfNotPresent
-       livenessProbe:
-         failureThreshold: 5
-         httpGet:
-           path: /
-           port: 8080
-             scheme: HTTP
-           initialDelaySeconds: 120
-           periodSeconds: 30
-           successThreshold: 1
-           timeoutSeconds: 10
-         name: java-app
+        imagePullPolicy: IfNotPresent
+        livenessProbe:
+          failureThreshold: 5
+          httpGet:
+            path: /
+            port: 8080
+              scheme: HTTP
+            initialDelaySeconds: 120
+            periodSeconds: 30
+            successThreshold: 1
+            timeoutSeconds: 10
+        name: java-app
         ports:
         - containerPort: 8080
           name: http
