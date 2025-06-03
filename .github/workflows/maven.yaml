@@ -50,6 +50,17 @@ jobs:
         push: true
         tags: obachimex/app:latest
 
+    - name: Deploy to AWS EKS
+      uses: giovannirossini/aws-eks@v2.0.0
+      with:
+        aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+        aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+        aws-region: "us-east-1"
+        cluster-name: "education-eks-G77VKGSX"
+        kubectl-version: "1.27"
+        command: |
+          kubectl apply -f ../deployment.yaml
+
 
           
           
