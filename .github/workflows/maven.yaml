@@ -49,7 +49,7 @@ jobs:
       uses: docker/build-push-action@v5
       with:
         push: true
-        tags: obachimex/app:latest
+        tags: obachimex/app:{{github.workflow_sha}}
 
     - name: Deploy to AWS EKS
       uses: giovannirossini/aws-eks@v2.0.0
