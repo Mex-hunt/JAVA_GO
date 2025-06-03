@@ -59,7 +59,7 @@ jobs:
         cluster-name: "education-eks-G77VKGSX"
         kubectl-version: "1.27"
         command: |
-          kubectl apply -f deployment.yaml
+          kubectl apply -f ../../deployment.yaml
 
 
           
