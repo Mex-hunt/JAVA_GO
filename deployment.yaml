@@ -13,11 +13,7 @@ spec:
   selector:
     matchLabels:
       app: java-app
-  strategy:
-    type: RollingUpdate
-    rollingUpdate:
-      maxSurge: 25%
-      maxUnavailable: 25%
+
   template:
     metadata:
       labels:
@@ -25,7 +21,7 @@ spec:
     spec:
       containers:
         - name: java-app
-          image: obachimex/app:latest
+          image: hello-world
           imagePullPolicy: IfNotPresent
           ports:
             - name: http
